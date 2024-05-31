@@ -1,0 +1,49 @@
+<h1>Employees:</h1>
+<button (click)="addEmployeeMutation.mutate()">Add Employee</button>
+
+@if (addEmployeeMutation.isPaused()) {
+    <nz-alert nzType="warning" 
+        nzMessage="Warning" 
+        nzBanner
+        nzCloseable
+        [nzDescription]="'Your requests will be sent once network connection is reestablished'" 
+        nzShowIcon />
+}
+
+@if (employees.isPending()) {
+<nz-skeleton />
+}
+
+@else if (employees.isSuccess()) {
+    @if (employees.data(); as employees) {
+        <nz-table #basicTable [nzData]="employees">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (entry of basicTable.data; track entry.id) {
+                <tr>
+                    <td>{{entry.id}}</td>
+                    <td>{{entry.name}}</td>
+                    <td>{{entry.country}}</td>
+                    <td>{{entry.email}}</td>
+                    <td>
+                        <a (click)="visitDetailsPage(entry.id)">Details</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </nz-table>
+    }
+
+}
+
+@else if (employees.isError()) {
+<nz-alert nzType="error" nzMessage="Error" [nzDescription]="employees.error().message" nzShowIcon />
+}

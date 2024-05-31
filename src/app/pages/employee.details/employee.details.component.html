@@ -1,0 +1,18 @@
+@if (employee.isRefetching()) {
+    <nz-spin [nzSpinning]="employee.isRefetching()">
+        <nz-alert nzType="warning"
+            nzMessage="Warning" 
+            nzBanner
+            nzCloseable
+            [nzDescription]="'The data might be out of date. Refetching...'"
+            nzShowIcon />
+    </nz-spin>
+}
+
+
+@if (employee.data()) {
+    <pre>{{ employee.data()?.id }}</pre>
+    <pre>{{ employee.data()?.name }}</pre>
+    <pre>{{ employee.data()?.email }}</pre>
+    <pre>{{ employee.data()?.country }}</pre>
+}
