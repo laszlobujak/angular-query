@@ -1,6 +1,6 @@
 # Tanstack
 
-Playing around with Tanstack Querys Angular implementation 
+## Playing around with Tanstack Querys Angular implementation, so don't expect clean code or tests, let alone CI/CD
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 
